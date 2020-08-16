@@ -27,8 +27,13 @@ const App = () => {
 
     const add = () => {
         if (value.trim() === "") return;
-        setTodoList([...todoList, { id: todoList.length, content: value, done: false }]);
-        setValue("");
+        const todo = { content: value, done: false };
+        db.table("todos")
+            .add(todo)
+            .then((id) => {
+                setTodoList([...todoList, { id: id as number, content: value, done: false }]);
+                setValue("");
+            });
     };
 
     const handleDelete = (id: number) => {
