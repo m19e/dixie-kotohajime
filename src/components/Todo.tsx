@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Todo = (props: any) => {
+const Todo = (props: any) => {
     return (
         <li>
             <input type="checkbox" checked={props.done} onChange={props.onToggle} />
@@ -9,3 +9,5 @@ export const Todo = (props: any) => {
         </li>
     );
 };
+
+export default Todo;

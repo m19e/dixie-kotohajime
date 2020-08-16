@@ -1,6 +1,6 @@
 import React from "react";
 
-export const AddTodo = (props: any) => {
+const AddTodo = (props: any) => {
     return (
         <>
             <input type="text" value={props.value} onChange={props.onChange}></input>
@@ -8,3 +8,5 @@ export const AddTodo = (props: any) => {
         </>
     );
 };
+
+export default AddTodo;
