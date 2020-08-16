@@ -45,8 +45,12 @@ const App = () => {
     };
 
     const handleToggle = (td: ITodo) => {
-        const newTodoList = [...todoList.filter((todo) => todo.id !== td.id), Object.assign({}, td, { done: !td.done })];
-        setTodoList(newTodoList);
+        db.table("todos")
+            .update(td.id, { done: !td.done })
+            .then(() => {
+                const newTodoList = [...todoList.filter((todo) => todo.id !== td.id), Object.assign({}, td, { done: !td.done })];
+                setTodoList(newTodoList);
+            });
     };
 
     return (
