@@ -59,7 +59,7 @@ const App = () => {
             <AddTodo value={value} onChange={handleChange} add={add} />
             <ul>
                 {todoList.map((todo: ITodo) => (
-                    <Todo key={todo.id} content={todo.content} onDelete={() => handleDelete(todo.id)} onToggle={() => handleToggle(todo)} />
+                    <Todo todo={todo} onDelete={() => handleDelete(todo.id)} onToggle={() => handleToggle(todo)} />
                 ))}
             </ul>
         </div>
