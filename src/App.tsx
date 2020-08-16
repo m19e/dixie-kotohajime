@@ -19,7 +19,7 @@ const App = () => {
     };
 
     const handleDelete = (id: number) => {
-        console.log("delete process");
+        setTodoList(todoList.filter((todo) => todo.id !== id));
     };
 
     return (
