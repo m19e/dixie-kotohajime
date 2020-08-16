@@ -14,7 +14,8 @@ const App = () => {
     };
 
     const add = () => {
-        console.log("add process");
+        setTodoList([...todoList, { id: todoList.length, content: value }]);
+        setValue("");
     };
 
     const handleDelete = (id: number) => {
