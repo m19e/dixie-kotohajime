@@ -37,7 +37,11 @@ const App = () => {
     };
 
     const handleDelete = (id: number) => {
-        setTodoList(todoList.filter((todo) => todo.id !== id));
+        db.table("todos")
+            .delete(id)
+            .then(() => {
+                setTodoList(todoList.filter((todo) => todo.id !== id));
+            });
     };
 
     const handleToggle = (td: ITodo) => {
