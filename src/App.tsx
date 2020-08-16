@@ -3,6 +3,7 @@ import React, { useState } from "react";
 interface ITodo {
     id: number;
     content: string;
+    done: boolean;
 }
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
     };
 
     const add = () => {
-        setTodoList([...todoList, { id: todoList.length, content: value }]);
+        setTodoList([...todoList, { id: todoList.length, content: value, done: false }]);
         setValue("");
     };
 
@@ -30,6 +31,7 @@ const App = () => {
             <ul>
                 {todoList.map((todo: ITodo) => (
                     <li key={todo.id}>
+                        <input type="checkbox" checked={todo.done} />
                         {todo.content}
                         <button onClick={() => handleDelete(todo.id)}>Delete</button>
                     </li>
