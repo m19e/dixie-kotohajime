@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddTodo from "./AddTodo";
 
 interface ITodo {
     id: number;
@@ -32,8 +33,7 @@ const App = () => {
     return (
         <div>
             <h1>TODO app</h1>
-            <input type="text" value={value} onChange={handleChange} />
-            <button onClick={add}>Add</button>
+            <AddTodo value={value} onChange={handleChange} add={add} />
             <ul>
                 {todoList.map((todo: ITodo) => (
                     <li key={todo.id}>
