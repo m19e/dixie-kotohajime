@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Todo from "./Todo";
 import AddTodo from "./AddTodo";
 
 interface ITodo {
@@ -36,11 +37,7 @@ const App = () => {
             <AddTodo value={value} onChange={handleChange} add={add} />
             <ul>
                 {todoList.map((todo: ITodo) => (
-                    <li key={todo.id}>
-                        <input type="checkbox" checked={todo.done} onChange={() => handleToggle(todo)} />
-                        {todo.content}
-                        <button onClick={() => handleDelete(todo.id)}>Delete</button>
-                    </li>
+                    <Todo key={todo.id} content={todo.content} onDelete={() => handleDelete(todo.id)} onToggle={() => handleToggle(todo)} />
                 ))}
             </ul>
         </div>
