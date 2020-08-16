@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Todo from "./Todo";
 import AddTodo from "./AddTodo";
+import db from "./db";
 
 interface ITodo {
     id: number;
@@ -11,6 +12,14 @@ interface ITodo {
 const App = () => {
     const [value, setValue] = useState("");
     const [todoList, setTodoList] = useState<ITodo[]>([]);
+
+    useEffect(() => {
+        db.table("todos")
+            .toArray()
+            .then((todos) => {
+                setTodoList(todos);
+            });
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
