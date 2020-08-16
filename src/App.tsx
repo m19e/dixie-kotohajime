@@ -15,6 +15,7 @@ const App = () => {
     };
 
     const add = () => {
+        if (value.trim() === "") return;
         setTodoList([...todoList, { id: todoList.length, content: value, done: false }]);
         setValue("");
     };
