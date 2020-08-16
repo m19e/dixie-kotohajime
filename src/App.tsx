@@ -7,7 +7,7 @@ interface ITodo {
 
 const App = () => {
     const [value, setValue] = useState("");
-    const [todoList, setTodoList] = useState([]);
+    const [todoList, setTodoList] = useState<ITodo[]>([]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
