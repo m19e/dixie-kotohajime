@@ -10,7 +10,7 @@ const App = () => {
     const [todoList, setTodoList] = useState([]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("change process", e);
+        setValue(e.target.value);
     };
 
     const add = () => {
