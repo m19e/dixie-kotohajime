@@ -24,6 +24,11 @@ const App = () => {
         setTodoList(todoList.filter((todo) => todo.id !== id));
     };
 
+    const handleToggle = (td: ITodo) => {
+        const newTodoList = [...todoList.filter((todo) => todo.id !== td.id), Object.assign({}, td, { done: !td.done })];
+        setTodoList(newTodoList);
+    };
+
     return (
         <div>
             <h1>TODO app</h1>
@@ -32,7 +37,7 @@ const App = () => {
             <ul>
                 {todoList.map((todo: ITodo) => (
                     <li key={todo.id}>
-                        <input type="checkbox" checked={todo.done} />
+                        <input type="checkbox" checked={todo.done} onChange={() => handleToggle(todo)} />
                         {todo.content}
                         <button onClick={() => handleDelete(todo.id)}>Delete</button>
                     </li>
