@@ -59,6 +59,18 @@ const App = () => {
         <div>
             <h1>TODO app</h1>
             <AddTodo value={value} onChange={handleChange} add={add} />
+            <TreeView
+                defaultCollapseIcon={<ExpandMore />}
+                defaultExpandIcon={<ChevronRight />}
+                defaultExpanded={["0"]}
+                style={{ maxWidth: "200px", overflow: "hidden" }}
+            >
+                <TreeItem nodeId="0" label="TodoList">
+                    {todoList.map((todo: ITodo) => (
+                        <TreeItem nodeId={"" + todo.id} label={todo.content} />
+                    ))}
+                </TreeItem>
+            </TreeView>
             <ul>
                 {todoList.map((todo: ITodo) => (
                     <Todo todo={todo} onDelete={() => handleDelete(todo.id)} onToggle={() => handleToggle(todo)} />
