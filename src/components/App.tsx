@@ -9,6 +9,8 @@ interface ITodo {
     id: number;
     content: string;
     done: boolean;
+    parent? : number;
+    children? : ITodo[]
 }
 
 const App = () => {
