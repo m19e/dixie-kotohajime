@@ -8,14 +8,36 @@ import db from "./db";
 interface ITodo {
     id: number;
     content: string;
-    done: boolean;
-    parent? : number;
-    children? : ITodo[]
+    done?: boolean;
+    parent?: number;
+    children?: ITodo[];
 }
+
+const dataTree: ITodo = {
+    id: 0,
+    content: "Parent",
+    children: [
+        {
+            id: 1,
+            content: "Child - 1",
+        },
+        {
+            id: 3,
+            content: "Child - 3",
+            children: [
+                {
+                    id: 4,
+                    content: "Child - 4",
+                },
+            ],
+        },
+    ],
+};
 
 const App = () => {
     const [value, setValue] = useState("");
     const [todoList, setTodoList] = useState<ITodo[]>([]);
+    const [tree, setTree] = useState<ITodo | null>(null);
 
     useEffect(() => {
         db.table("todos")
@@ -24,6 +46,10 @@ const App = () => {
                 setTodoList(todos);
             });
     }, []);
+
+    useEffect(() => {
+        setTree(convertListToTree(todoList) || dataTree);
+    }, [todoList]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
@@ -57,6 +83,16 @@ const App = () => {
             });
     };
 
+    const convertListToTree = (todos: ITodo[]) => {
+        return null;
+    };
+
+    const renderTree = (nodes: ITodo) => (
+        <TreeItem key={nodes.id} nodeId={"" + nodes.id} label={nodes.content}>
+            {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
+        </TreeItem>
+    );
+
     return (
         <div>
             <h1>TODO app</h1>
@@ -72,6 +108,14 @@ const App = () => {
                         <TreeItem nodeId={"" + todo.id} label={todo.content} />
                     ))}
                 </TreeItem>
+            </TreeView>
+            <TreeView
+                defaultCollapseIcon={<ExpandMore />}
+                defaultExpandIcon={<ChevronRight />}
+                defaultExpanded={["0"]}
+                style={{ maxWidth: "200px", overflow: "hidden" }}
+            >
+                {renderTree(dataTree)}
             </TreeView>
             <ul>
                 {todoList.map((todo: ITodo) => (
