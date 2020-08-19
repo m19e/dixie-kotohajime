@@ -105,7 +105,7 @@ const App = () => {
             >
                 <TreeItem nodeId="0" label="TodoList">
                     {todoList.map((todo: ITodo) => (
-                        <TreeItem nodeId={"" + todo.id} label={todo.content} />
+                        <TreeItem key={todo.id} nodeId={"" + todo.id} label={todo.content} />
                     ))}
                 </TreeItem>
             </TreeView>
@@ -119,7 +119,7 @@ const App = () => {
             </TreeView>
             <ul>
                 {todoList.map((todo: ITodo) => (
-                    <Todo todo={todo} onDelete={() => handleDelete(todo.id)} onToggle={() => handleToggle(todo)} />
+                    <Todo key={todo.id} todo={todo} onDelete={() => handleDelete(todo.id)} onToggle={() => handleToggle(todo)} />
                 ))}
             </ul>
         </div>
