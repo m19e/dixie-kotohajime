@@ -14,9 +14,11 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "dexie": "^3.0.2",
+    "list-to-tree": "^2.2.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
+    "tree-model": "^1.0.7",
     "typescript": "~3.7.2"
   },
   "scripts": {

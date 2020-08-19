@@ -1095,6 +1095,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
+"@denq/iron-tree@^1.3.1":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@denq/iron-tree/-/iron-tree-1.3.2.tgz#b125c9847556e31f3a794a629d66726ab763dcb3"
+  integrity sha512-LcwTy4yH9W4z9jgMWOdhxshT0FISjkKgsK8YkPF18nBW9ob4De667KSeRVft+p7d7r7TU+mOUPjcBKFBvoK8hw==
+
 "@emotion/hash@^0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
@@ -4668,6 +4673,11 @@ find-cache-dir@^3.3.1:
     make-dir "^3.0.2"
     pkg-dir "^4.1.0"
 
+find-insert-index@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/find-insert-index/-/find-insert-index-0.0.1.tgz#16cd34664c2ac233905ab2b39745bcec721362de"
+  integrity sha1-Fs00ZkwqwjOQWrKzl0W87HITYt4=
+
 find-up@4.1.0, find-up@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-4.1.0.tgz#97afe7d6cdc0bc5928584b7c8d7b16e8a9aa5d19"
@@ -6608,6 +6618,13 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
+list-to-tree@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/list-to-tree/-/list-to-tree-2.2.3.tgz#8b36499850d6e4ed61db620e7adf7a910aeb488f"
+  integrity sha512-u15N2C9Gek5JbkwquMRnt5XQtTRuj1IhHdkqSDjLcgPuVlhxvwO8opbmB0omhDmEcTzJCpaK3t1JbqlYU6+QsA==
+  dependencies:
+    "@denq/iron-tree" "^1.3.1"
+
 load-json-file@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-2.0.0.tgz#7947e42149af80d696cbf797bcaabcfe1fe29ca8"
@@ -6850,6 +6867,11 @@ merge2@^1.2.3:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.3.0.tgz#5b366ee83b2f1582c48f87e47cf1a9352103ca81"
   integrity sha512-2j4DAdlBOkiSZIsaXk4mTE3sRS02yBHAtfy127xRV3bQUFqXkjHCHLW6Scv7DwNRbIWNHH8zpnz9zMaKXIdvYw==
+
+mergesort@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/mergesort/-/mergesort-0.0.1.tgz#364ecc31b297dc7f44e511d365176f1c39d08fc2"
+  integrity sha1-Nk7MMbKX3H9E5RHTZRdvHDnQj8I=
 
 methods@~1.1.2:
   version "1.1.2"
@@ -10263,6 +10285,14 @@ tr46@^1.0.1:
   integrity sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=
   dependencies:
     punycode "^2.1.0"
+
+tree-model@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/tree-model/-/tree-model-1.0.7.tgz#45b2307aa2dfc2da8ceb6a631c1e2b15550dce88"
+  integrity sha512-oP4LUbCVtD2gcjcRaeI4L5hY60tHzB+AK/bthIJ2Pq1EUUOio5/xFzPWnGoBZlhtqpqbOkhFDzKIwKLOn0kccQ==
+  dependencies:
+    find-insert-index "0.0.1"
+    mergesort "0.0.1"
 
 ts-pnp@1.1.6, ts-pnp@^1.1.6:
   version "1.1.6"
