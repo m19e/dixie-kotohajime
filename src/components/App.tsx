@@ -16,42 +16,50 @@ interface ITodo {
     children?: ITodo[];
 }
 
-const dataTree: ITodo = {
-    id: 0,
-    content: "Parent",
-    children: [
-        {
-            id: 1,
-            content: "Child - 1",
-        },
-        {
-            id: 3,
-            content: "Child - 3",
-            children: [
-                {
-                    id: 4,
-                    content: "Child - 4",
-                },
-            ],
-        },
-    ],
-};
+const dataList: ITodo[] = [
+    { id: 1, content: "Parent", parent: 0 },
+    { id: 2, content: "child 1", parent: 1 },
+    { id: 3, content: "child 2", parent: 2 },
+    { id: 4, content: "child 3", parent: 3 },
+];
+
+const dataTree = convertLTT(dataList)[0];
+
+// console.log(dataTree);
+
+// const tm = new TreeModel();
+// const root = tm.parse(dataTree);
+
+// console.log(root.all(() => true));
+
+// const f = root.first((node) => {
+//     return node.model.id === 1;
+// });
+
+// if (f) {
+//     console.log(f.model);
+
+//     if (f.model.content) {
+//         f.model.content = "prop update test";
+//     }
+
+//     console.log(f.model);
+// }
+
+// console.log(root.all(() => true));
 
 const App = () => {
     const [value, setValue] = useState("");
-    const [todoList, setTodoList] = useState<ITodo[]>([]);
-    const [tree, setTree] = useState<ITodo | null>(null);
+    const [todoList, setTodoList] = useState<ITodo[]>(dataList);
+    const [tree, setTree] = useState(dataTree);
 
     useEffect(() => {
-        db.table("todos")
-            .toArray()
-            .then((todos) => {
-                setTodoList(todos);
-            });
+        // loadListFromDB("todos", setTodoList);
+        // setTodoList(dataList)
     }, []);
 
     useEffect(() => {
-        setTree(convertListToTree(todoList) || dataTree);
+        setTree(convertLTT(todoList)[0]);
     }, [todoList]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,21 +94,21 @@ const App = () => {
             });
     };
 
-    const convertListToTree = (todos: ITodo[]) => {
-        return null;
-    };
+    const renderTree = (nodes: ITodo) => {
+        // console.log(nodes);
 
-    const renderTree = (nodes: ITodo) => (
-        <TreeItem key={nodes.id} nodeId={"" + nodes.id} label={nodes.content}>
-            {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
-        </TreeItem>
-    );
+        return (
+            <TreeItem key={nodes.id} nodeId={"" + nodes.id} label={nodes.content}>
+                {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
+            </TreeItem>
+        );
+    };
 
     return (
         <div>
             <h1>TODO app</h1>
             <AddTodo value={value} onChange={handleChange} add={add} />
-            <TreeView
+            {/* <TreeView
                 defaultCollapseIcon={<ExpandMore />}
                 defaultExpandIcon={<ChevronRight />}
                 defaultExpanded={["0"]}
@@ -111,14 +119,14 @@ const App = () => {
                         <TreeItem key={todo.id} nodeId={"" + todo.id} label={todo.content} />
                     ))}
                 </TreeItem>
-            </TreeView>
+            </TreeView> */}
             <TreeView
                 defaultCollapseIcon={<ExpandMore />}
                 defaultExpandIcon={<ChevronRight />}
-                defaultExpanded={["0"]}
+                defaultExpanded={[...todoList.map((td) => "" + td.id)]}
                 style={{ maxWidth: "200px", overflow: "hidden" }}
             >
-                {renderTree(dataTree)}
+                {renderTree(tree)}
             </TreeView>
             <ul>
                 {todoList.map((todo: ITodo) => (
