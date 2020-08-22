@@ -13,20 +13,20 @@ import loadListFromDB from "./loadListFromDB";
 
 interface ITodo {
     id: number;
-    content: string;
+    title: string;
     done?: boolean;
     parent?: number;
     children?: ITodo[];
 }
 
 const dataList: ITodo[] = [
-    { id: 1, content: "Parent", parent: 0 },
-    { id: 2, content: "child 1", parent: 1 },
-    { id: 3, content: "child 2", parent: 2 },
-    { id: 4, content: "child 3", parent: 3 },
+    { id: 1, title: "Parent", parent: 0 },
+    { id: 2, title: "child 1", parent: 1 },
+    { id: 3, title: "child 2", parent: 2 },
+    { id: 4, title: "child 3", parent: 3 },
 ];
 
-const dataTree = convertLTT(dataList)[0];
+const dataTree = convertLTT(dataList);
 
 // console.log(dataTree);
 
@@ -91,10 +91,11 @@ const App = () => {
     useEffect(() => {
         // loadListFromDB("todos", setTodoList);
         // setTodoList(dataList)
+        console.log(tree);
     }, []);
 
     useEffect(() => {
-        setTree(convertLTT(todoList)[0]);
+        setTree(convertLTT(todoList));
     }, [todoList]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,7 +108,7 @@ const App = () => {
         db.table("todos")
             .add(todo)
             .then((id) => {
-                setTodoList([...todoList, { id: id as number, content: value, done: false }]);
+                setTodoList([...todoList, { id: id as number, title: value, done: false }]);
                 setValue("");
             });
     };
@@ -133,7 +134,7 @@ const App = () => {
         // console.log(nodes);
 
         return (
-            <TreeItem key={nodes.id} nodeId={"" + nodes.id} label={nodes.content}>
+            <TreeItem key={nodes.id} nodeId={"" + nodes.id} label={nodes.title}>
                 {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
             </TreeItem>
         );
@@ -165,10 +166,10 @@ const App = () => {
             </TreeView> */}
             <div style={{ height: 400 }}>
                 <SortableTree
-                    treeData={treeData}
+                    treeData={tree}
                     onChange={(data) => {
                         console.log(JSON.stringify(data, null, 4));
-                        setTreeData(data);
+                        setTree(data);
                     }}
                     theme={FileExplorerTheme}
                     canDrag={({ node }) => !node.dragDisabled}
