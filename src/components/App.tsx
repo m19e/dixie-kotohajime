@@ -55,9 +55,37 @@ const App = () => {
     const [value, setValue] = useState("");
     const [todoList, setTodoList] = useState<ITodo[]>(dataList);
     const [tree, setTree] = useState(dataTree);
+    // const [treeData, setTreeData] = useState<any[]>([
+    //     { title: "Chicken", children: [{ title: "Egg" }] },
+    //     { title: "Fish", children: [{ title: "fingerline" }] },
+    // ]);
     const [treeData, setTreeData] = useState<any[]>([
-        { title: "Chicken", children: [{ title: "Egg" }] },
-        { title: "Fish", children: [{ title: "fingerline" }] },
+        { title: ".gitignore" },
+        { title: "package.json" },
+        {
+            title: "src",
+            isDirectory: true,
+            expanded: true,
+            children: [{ title: "styles.css" }, { title: "index.js" }, { title: "reducers.js" }, { title: "actions.js" }, { title: "utils.js" }],
+        },
+        {
+            title: "tmp",
+            isDirectory: true,
+            children: [{ title: "12214124-log" }, { title: "drag-disabled-file", dragDisabled: true }],
+        },
+        {
+            title: "build",
+            isDirectory: true,
+            children: [{ title: "react-sortable-tree.js" }],
+        },
+        {
+            title: "public",
+            isDirectory: true,
+        },
+        {
+            title: "node_modules",
+            isDirectory: true,
+        },
     ]);
 
     useEffect(() => {
@@ -127,16 +155,45 @@ const App = () => {
                     ))}
                 </TreeItem>
             </TreeView> */}
-            <TreeView
+            {/* <TreeView
                 defaultCollapseIcon={<ExpandMore />}
                 defaultExpandIcon={<ChevronRight />}
                 defaultExpanded={[...todoList.map((td) => "" + td.id)]}
                 style={{ maxWidth: "200px", overflow: "hidden" }}
             >
                 {renderTree(tree)}
-            </TreeView>
+            </TreeView> */}
             <div style={{ height: 400 }}>
-                <SortableTree treeData={treeData} onChange={(tData) => setTreeData(tData)} theme={FileExplorerTheme} />
+                <SortableTree
+                    treeData={treeData}
+                    onChange={(data) => {
+                        console.log(JSON.stringify(data, null, 4));
+                        setTreeData(data);
+                    }}
+                    theme={FileExplorerTheme}
+                    canDrag={({ node }) => !node.dragDisabled}
+                    canDrop={({ nextParent }) => !nextParent || nextParent.isDirectory}
+                    generateNodeProps={(rowInfo) => ({
+                        icons: rowInfo.node.isDirectory
+                            ? [
+                                  <div
+                                      style={{
+                                          borderLeft: "solid 8px gray",
+                                          borderBottom: "solid 10px gray",
+                                          marginRight: 10,
+                                          boxSizing: "border-box",
+                                          width: 16,
+                                          height: 12,
+                                          filter: rowInfo.node.expanded
+                                              ? "drop-shadow(1px 0 0 gray) drop-shadow(0 1px 0 gray) drop-shadow(0 -1px 0 gray) drop-shadow(-1px 0 0 gray)"
+                                              : "none",
+                                          borderColor: rowInfo.node.expanded ? "white" : "gray",
+                                      }}
+                                  />,
+                              ]
+                            : [<div style={{ width: 0, height: 0 }} />],
+                    })}
+                />
             </div>
             <ul>
                 {todoList.map((todo: ITodo) => (
