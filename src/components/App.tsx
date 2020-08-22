@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ExpandMore, ChevronRight } from "@material-ui/icons";
 import { TreeView, TreeItem } from "@material-ui/lab";
 import SortableTree from "react-sortable-tree";
+import "react-sortable-tree/style.css";
 import TreeModel from "tree-model";
 import Todo from "./Todo";
 import AddTodo from "./AddTodo";
@@ -53,6 +54,10 @@ const App = () => {
     const [value, setValue] = useState("");
     const [todoList, setTodoList] = useState<ITodo[]>(dataList);
     const [tree, setTree] = useState(dataTree);
+    const [treeData, setTreeData] = useState<any[]>([
+        { title: "Chicken", children: [{ title: "Egg" }] },
+        { title: "Fish", children: [{ title: "fingerline" }] },
+    ]);
 
     useEffect(() => {
         // loadListFromDB("todos", setTodoList);
@@ -129,6 +134,9 @@ const App = () => {
             >
                 {renderTree(tree)}
             </TreeView>
+            <div style={{ height: 400 }}>
+                <SortableTree treeData={treeData} onChange={(tData) => setTreeData(tData)} />
+            </div>
             <ul>
                 {todoList.map((todo: ITodo) => (
                     <Todo key={todo.id} todo={todo} onDelete={() => handleDelete(todo.id)} onToggle={() => handleToggle(todo)} />
