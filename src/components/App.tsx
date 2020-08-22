@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ExpandMore, ChevronRight } from "@material-ui/icons";
 import { TreeView, TreeItem } from "@material-ui/lab";
 import SortableTree from "react-sortable-tree";
+import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
 import "react-sortable-tree/style.css";
 import TreeModel from "tree-model";
 import Todo from "./Todo";
@@ -135,7 +136,7 @@ const App = () => {
                 {renderTree(tree)}
             </TreeView>
             <div style={{ height: 400 }}>
-                <SortableTree treeData={treeData} onChange={(tData) => setTreeData(tData)} />
+                <SortableTree treeData={treeData} onChange={(tData) => setTreeData(tData)} theme={FileExplorerTheme} />
             </div>
             <ul>
                 {todoList.map((todo: ITodo) => (
