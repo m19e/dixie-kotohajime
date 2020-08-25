@@ -55,10 +55,6 @@ const App = () => {
     const [value, setValue] = useState("");
     const [todoList, setTodoList] = useState<ITodo[]>(dataList);
     const [tree, setTree] = useState(dataTree);
-    // const [treeData, setTreeData] = useState<any[]>([
-    //     { title: "Chicken", children: [{ title: "Egg" }] },
-    //     { title: "Fish", children: [{ title: "fingerline" }] },
-    // ]);
 
     useEffect(() => {
         loadListFromDB("todos", setTodoList);
