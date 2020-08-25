@@ -74,11 +74,11 @@ const App = () => {
 
     const add = () => {
         if (value.trim() === "") return;
-        const todo = { content: value, done: false };
+        const todo = { title: value, done: false, parent: 0 };
         db.table("todos")
             .add(todo)
             .then((id) => {
-                setTodoList([...todoList, { id: id as number, title: value, done: false }]);
+                setTodoList([...todoList, { id: id as number, title: value, done: false, parent: 0 }]);
                 setValue("");
             });
     };
