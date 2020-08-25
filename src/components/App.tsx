@@ -193,6 +193,7 @@ const App = () => {
                                   />,
                               ]
                             : [<div style={{ width: 0, height: 0 }} />],
+                        onClick: () => console.log(rowInfo.node.title),
                     })}
                 />
             </div>
