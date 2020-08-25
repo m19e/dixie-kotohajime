@@ -15,7 +15,7 @@ interface ITodo {
     id: number;
     title: string;
     done?: boolean;
-    parent?: number;
+    parent: number;
     children?: ITodo[];
 }
 
