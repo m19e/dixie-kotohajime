@@ -61,9 +61,7 @@ const App = () => {
     // ]);
 
     useEffect(() => {
-        // loadListFromDB("todos", setTodoList);
-        // setTodoList(dataList)
-        console.log(tree);
+        loadListFromDB("todos", setTodoList);
     }, []);
 
     useEffect(() => {
