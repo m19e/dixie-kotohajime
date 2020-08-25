@@ -137,6 +137,16 @@ const App = () => {
                         console.log(JSON.stringify(data, null, 4));
                         setTree(data);
                     }}
+                    onMoveNode={(data) => {
+                        console.log(JSON.stringify(data, null, 2));
+                        if (data.nextParentNode !== undefined) {
+                            if (data.nextParentNode === null) {
+                                console.log("parent is root", 0);
+                                return;
+                            }
+                            console.log((data.nextParentNode as ITodo).id);
+                        }
+                    }}
                     theme={FileExplorerTheme}
                     canDrag={({ node }) => !node.dragDisabled}
                     canDrop={({ nextParent }) => !nextParent || nextParent.isDirectory}
