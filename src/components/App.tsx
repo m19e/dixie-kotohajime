@@ -4,7 +4,6 @@ import { TreeView, TreeItem } from "@material-ui/lab";
 import SortableTree from "react-sortable-tree";
 import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
 import "react-sortable-tree/style.css";
-import TreeModel from "tree-model";
 import Todo from "./Todo";
 import AddTodo from "./AddTodo";
 import db from "./db";
@@ -27,29 +26,6 @@ const dataList: ITodo[] = [
 ];
 
 const dataTree = convertLTT(dataList);
-
-// console.log(dataTree);
-
-// const tm = new TreeModel();
-// const root = tm.parse(dataTree);
-
-// console.log(root.all(() => true));
-
-// const f = root.first((node) => {
-//     return node.model.id === 1;
-// });
-
-// if (f) {
-//     console.log(f.model);
-
-//     if (f.model.content) {
-//         f.model.content = "prop update test";
-//     }
-
-//     console.log(f.model);
-// }
-
-// console.log(root.all(() => true));
 
 const App = () => {
     const [value, setValue] = useState("");
