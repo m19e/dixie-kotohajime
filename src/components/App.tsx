@@ -30,15 +30,20 @@ const dataTree = convertLTT(dataList);
 
 const App = () => {
     const [value, setValue] = useState("");
-    const [todoList, setTodoList] = useState<ITodo[]>(dataList);
+    const [todoList, setTodoList] = useState<ITodo[]>([]);
     const [tree, setTree] = useState(dataTree);
+    const [treeLocal, setTreeLocal] = useLocalStorage("mytodolist-tree", JSON.stringify([{ id: 1, title: "Menu", parent: 0 }]));
 
     useEffect(() => {
         loadListFromDB("todos", setTodoList);
+        setTree(JSON.parse(treeLocal));
     }, []);
 
     useEffect(() => {
-        setTree(convertLTT(todoList));
+        // setTree(() => {
+        //     const ltt = convertLTT(todoList);
+        //     return ltt;
+        // });
     }, [todoList]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,8 +116,12 @@ const App = () => {
                 <SortableTree
                     treeData={tree}
                     onChange={(data) => {
-                        console.log(JSON.stringify(data, null, 4));
-                        setTree(data);
+                        setTreeLocal(
+                            (() => {
+                                setTree(data);
+                                return JSON.stringify(data);
+                            })()
+                        );
                     }}
                     theme={FileExplorerTheme}
                     canDrag={({ node }) => !node.dragDisabled}
