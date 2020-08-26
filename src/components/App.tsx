@@ -138,7 +138,6 @@ const App = () => {
                                   />,
                               ]
                             : [],
-                        onClick: () => console.log(rowInfo.node.title),
                     })}
                 />
             </div>
