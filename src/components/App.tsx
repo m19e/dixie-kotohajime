@@ -39,13 +39,6 @@ const App = () => {
         setTree(JSON.parse(treeLocal));
     }, []);
 
-    useEffect(() => {
-        // setTree(() => {
-        //     const ltt = convertLTT(todoList);
-        //     return ltt;
-        // });
-    }, [todoList]);
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     };
