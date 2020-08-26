@@ -22,6 +22,7 @@
     "react-scripts": "3.4.3",
     "react-sortable-tree": "^2.8.0",
     "react-sortable-tree-theme-file-explorer": "^2.0.0",
+    "react-use-localstorage": "^3.5.3",
     "tree-model": "^1.0.7",
     "typescript": "~3.7.2"
   },
