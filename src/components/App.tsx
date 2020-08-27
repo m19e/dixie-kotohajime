@@ -32,7 +32,7 @@ const App = () => {
     const [value, setValue] = useState("");
     const [todoList, setTodoList] = useState<ITodo[]>([]);
     const [tree, setTree] = useState(dataTree);
-    const [treeLocal, setTreeLocal] = useLocalStorage("mytodolist-tree", JSON.stringify([{ id: 1, title: "Menu", parent: 0, isDirectory: true }]));
+    const [treeLocal, setTreeLocal] = useLocalStorage("mytodolist-tree", JSON.stringify([{ id: 1, title: "Menu", parent: 0, isDir: true }]));
 
     useEffect(() => {
         loadListFromDB("todos", setTodoList);
@@ -57,7 +57,7 @@ const App = () => {
 
     const addDir = () => {
         if (value.trim() === "") return;
-        const todo = { title: value, done: false, parent: 0, isDirectory: true };
+        const todo = { title: value, done: false, parent: 0, isDir: true };
         db.table("todos")
             .add(todo)
             .then((id) => {
@@ -131,9 +131,9 @@ const App = () => {
                     }}
                     theme={FileExplorerTheme}
                     canDrag={({ node }) => !node.dragDisabled}
-                    canDrop={({ nextParent }) => !nextParent || nextParent.isDirectory}
+                    canDrop={({ nextParent }) => !nextParent || nextParent.isDir}
                     generateNodeProps={(rowInfo) => ({
-                        icons: rowInfo.node.isDirectory
+                        icons: rowInfo.node.isDir
                             ? [
                                   <div
                                       style={{
