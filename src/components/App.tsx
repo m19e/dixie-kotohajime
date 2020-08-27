@@ -148,6 +148,14 @@ const App = () => {
                                   />,
                               ]
                             : [],
+                        buttons: rowInfo.node.isDir
+                        ? [
+                            <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
+                            <button onClick={() => console.log(rowInfo.node)}>AddFile</button>,
+                            <button onClick={() => console.log(rowInfo.node)}>Delete</button>,
+                        ] : [
+                            <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
+                            <button onClick={() => console.log(rowInfo.node)}>Delete</button>],
                     })}
                 />
             </div>
