@@ -55,6 +55,18 @@ const App = () => {
             });
     };
 
+    const addDirectory = () => {
+        if (value.trim() === "") return;
+        const todo = { title: value, done: false, parent: 0, isDirectory: true };
+        db.table("todos")
+            .add(todo)
+            .then((id) => {
+                setTodoList([...todoList, { id: id as number, title: value, done: false, parent: 0 }]);
+                setTree([...tree, Object.assign({}, todo, {id: id as number})])
+                setValue("");
+            });
+    }
+
     const handleDelete = (id: number) => {
         db.table("todos")
             .delete(id)
