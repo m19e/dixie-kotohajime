@@ -31,7 +31,7 @@ const dataTree = convertLTT(dataList);
 const App = () => {
     const [value, setValue] = useState("");
     const [todoList, setTodoList] = useState<ITodo[]>([]);
-    const [tree, setTree] = useState(dataTree);
+    const [tree, setTree] = useState<any[]>([]);
     const [treeLocal, setTreeLocal] = useLocalStorage("mytodolist-tree", JSON.stringify([{ id: 1, title: "Menu", parent: 0, isDir: true }]));
 
     useEffect(() => {
