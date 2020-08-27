@@ -50,6 +50,7 @@ const App = () => {
             .add(todo)
             .then((id) => {
                 setTodoList([...todoList, { id: id as number, title: value, done: false, parent: 0 }]);
+                setTree([...tree, Object.assign({}, todo, {id: id as number})])
                 setValue("");
             });
     };
