@@ -39,6 +39,10 @@ const App = () => {
         setTree(JSON.parse(treeLocal));
     }, []);
 
+    useEffect(() => {
+        setTreeLocal(JSON.stringify(tree))
+    }, [tree])
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     };
@@ -121,14 +125,7 @@ const App = () => {
             <div style={{ height: 400 }}>
                 <SortableTree
                     treeData={tree}
-                    onChange={(data) => {
-                        setTreeLocal(
-                            (() => {
-                                setTree(data);
-                                return JSON.stringify(data);
-                            })()
-                        );
-                    }}
+                    onChange={setTree}
                     theme={FileExplorerTheme}
                     canDrag={({ node }) => !node.dragDisabled}
                     canDrop={({ nextParent }) => !nextParent || nextParent.isDir}
