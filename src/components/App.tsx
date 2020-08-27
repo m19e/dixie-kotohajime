@@ -55,7 +55,7 @@ const App = () => {
             });
     };
 
-    const addDirectory = () => {
+    const addDir = () => {
         if (value.trim() === "") return;
         const todo = { title: value, done: false, parent: 0, isDirectory: true };
         db.table("todos")
