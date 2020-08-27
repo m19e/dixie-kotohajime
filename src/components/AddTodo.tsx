@@ -5,6 +5,7 @@ const AddTodo = (props: any) => {
         <>
             <input type="text" value={props.value} onChange={props.onChange}></input>
             <button onClick={props.add}>Add</button>
+            <button onClick={props.addDir}>AddDir</button>
         </>
     );
 };

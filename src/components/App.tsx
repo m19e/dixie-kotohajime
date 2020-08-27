@@ -97,7 +97,7 @@ const App = () => {
     return (
         <div>
             <h1>TODO app</h1>
-            <AddTodo value={value} onChange={handleChange} add={add} />
+            <AddTodo value={value} onChange={handleChange} add={add} addDir={addDir} />
             {/* <TreeView
                 defaultCollapseIcon={<ExpandMore />}
                 defaultExpandIcon={<ChevronRight />}
