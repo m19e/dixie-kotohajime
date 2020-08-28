@@ -168,12 +168,9 @@ const App = () => {
                             ? [
                                   <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
                                   <button onClick={() => console.log(rowInfo.node)}>AddFile</button>,
-                                  <button onClick={() => console.log(rowInfo.node)}>Delete</button>,
+                                  <button onClick={() => deleteNode(rowInfo)}>Delete</button>,
                               ]
-                            : [
-                                  <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
-                                  <button onClick={() => console.log(rowInfo.node)}>Delete</button>,
-                              ],
+                            : [<button onClick={() => console.log(rowInfo.node)}>Rename</button>, <button onClick={() => deleteNode(rowInfo)}>Delete</button>],
                     })}
                 />
             </div>
