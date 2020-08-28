@@ -40,8 +40,8 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        setTreeLocal(JSON.stringify(tree))
-    }, [tree])
+        setTreeLocal(JSON.stringify(tree));
+    }, [tree]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
@@ -54,7 +54,7 @@ const App = () => {
             .add(todo)
             .then((id) => {
                 setTodoList([...todoList, { id: id as number, title: value, done: false, parent: 0 }]);
-                setTree([...tree, Object.assign({}, todo, {id: id as number})])
+                setTree([...tree, Object.assign({}, todo, { id: id as number })]);
                 setValue("");
             });
     };
@@ -66,10 +66,10 @@ const App = () => {
             .add(todo)
             .then((id) => {
                 setTodoList([...todoList, { id: id as number, title: value, done: false, parent: 0 }]);
-                setTree([...tree, Object.assign({}, todo, {id: id as number})])
+                setTree([...tree, Object.assign({}, todo, { id: id as number })]);
                 setValue("");
             });
-    }
+    };
 
     const handleDelete = (id: number) => {
         db.table("todos")
@@ -149,13 +149,15 @@ const App = () => {
                               ]
                             : [],
                         buttons: rowInfo.node.isDir
-                        ? [
-                            <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
-                            <button onClick={() => console.log(rowInfo.node)}>AddFile</button>,
-                            <button onClick={() => console.log(rowInfo.node)}>Delete</button>,
-                        ] : [
-                            <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
-                            <button onClick={() => console.log(rowInfo.node)}>Delete</button>],
+                            ? [
+                                  <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
+                                  <button onClick={() => console.log(rowInfo.node)}>AddFile</button>,
+                                  <button onClick={() => console.log(rowInfo.node)}>Delete</button>,
+                              ]
+                            : [
+                                  <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
+                                  <button onClick={() => console.log(rowInfo.node)}>Delete</button>,
+                              ],
                     })}
                 />
             </div>
