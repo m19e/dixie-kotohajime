@@ -79,6 +79,14 @@ const App = () => {
             });
     };
 
+    const handleBulkDelete = (ids: number[]) => {
+        db.table("todos")
+            .bulkDelete(ids)
+            .then(() => {
+                setTodoList(todoList.filter((todo) => !ids.includes(todo.id)));
+            });
+    };
+
     const handleToggle = (td: ITodo) => {
         db.table("todos")
             .update(td.id, { done: !td.done })
