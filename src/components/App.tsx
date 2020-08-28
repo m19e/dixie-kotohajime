@@ -117,12 +117,9 @@ const App = () => {
             })
         );
 
-        // TODO: if node has children (= isDir is true), delete childNodes on indexedDB!
         if (Array.isArray(node.children) && node.children.length !== 0) {
-            console.log("bulkDelete nodes");
             handleBulkDelete([...node.children.map((child) => child.id), node.id]);
         } else {
-            console.log("delete node");
             handleDelete(node.id);
         }
     };
