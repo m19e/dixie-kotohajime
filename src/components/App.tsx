@@ -98,6 +98,22 @@ const App = () => {
     //     );
     // };
 
+    const deleteNode = (rowInfo: ExtendedNodeData) => {
+        const { path, node } = rowInfo;
+        setTree(
+            removeNodeAtPath({
+                treeData: tree,
+                path,
+                getNodeKey: ({ treeIndex }) => treeIndex,
+                ignoreCollapsed: false,
+            })
+        );
+        console.log(node);
+
+        // TODO: if node has children (= isDir is true), delete childNodes on indexedDB!
+        handleDelete(node.id);
+    };
+
     return (
         <div>
             <h1>TODO app</h1>
