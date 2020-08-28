@@ -174,6 +174,7 @@ const App = () => {
                     })}
                 />
             </div>
+            <h2>Data on DB</h2>
             <ul>
                 {todoList.map((todo: ITodo) => (
                     <Todo key={todo.id} todo={todo} onDelete={() => handleDelete(todo.id)} onToggle={() => handleToggle(todo)} />
