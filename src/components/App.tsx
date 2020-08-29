@@ -196,7 +196,10 @@ const App = () => {
                                   <button onClick={() => console.log(rowInfo.node)}>AddFile</button>,
                                   <button onClick={() => deleteNode(rowInfo)}>Delete</button>,
                               ]
-                            : [<button onClick={() => console.log(rowInfo.node)}>Rename</button>, <button onClick={() => deleteNode(rowInfo)}>Delete</button>],
+                            : [
+                                  <button onClick={() => updateNode(rowInfo, { title: value })}>Rename</button>,
+                                  <button onClick={() => deleteNode(rowInfo)}>Delete</button>,
+                              ],
                     })}
                 />
             </div>
