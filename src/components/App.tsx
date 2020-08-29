@@ -106,6 +106,22 @@ const App = () => {
     //     );
     // };
 
+    const updateNode = (rowInfo: ExtendedNodeData, updatedObj: { [key: string]: string }) => {
+        const { path, node } = rowInfo;
+        const newNode = Object.assign({}, node, updatedObj);
+        setTree(
+            changeNodeAtPath({
+                treeData: tree,
+                path,
+                newNode,
+                getNodeKey: ({ treeIndex }) => treeIndex,
+                ignoreCollapsed: false,
+            })
+        );
+
+        setValue("");
+    };
+
     const deleteNode = (rowInfo: ExtendedNodeData) => {
         const { path, node } = rowInfo;
         setTree(
