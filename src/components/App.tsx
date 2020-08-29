@@ -120,6 +120,13 @@ const App = () => {
         );
 
         setValue("");
+
+        db.table("todos")
+            .update(node.id, updatedObj)
+            .then(() => {
+                const newTodoList = [...todoList.map((todo) => (todo.id !== node.id ? todo : Object.assign({}, todo, updatedObj)))];
+                setTodoList(newTodoList);
+            });
     };
 
     const deleteNode = (rowInfo: ExtendedNodeData) => {
