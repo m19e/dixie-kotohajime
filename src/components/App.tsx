@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ExpandMore, ChevronRight } from "@material-ui/icons";
 // import { TreeView, TreeItem } from "@material-ui/lab";
-import SortableTree, { TreeItem, ExtendedNodeData, removeNodeAtPath, changeNodeAtPath } from "react-sortable-tree";
+import SortableTree, { TreeItem, ExtendedNodeData, removeNodeAtPath, changeNodeAtPath, addNodeUnderParent } from "react-sortable-tree";
 import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
 import "react-sortable-tree/style.css";
 import useLocalStorage from "react-use-localstorage";
@@ -105,6 +105,10 @@ const App = () => {
     //         </TreeItem>
     //     );
     // };
+
+    const createNode = (rowInfo: ExtendedNodeData, addNode: { [key: string]: string }) => {
+        // maybe use 'addNodeUnderParent'
+    };
 
     const updateNode = (rowInfo: ExtendedNodeData, updatedObj: { [key: string]: string }) => {
         const { path, node } = rowInfo;
