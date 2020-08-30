@@ -194,7 +194,7 @@ const App = () => {
         <div>
             <h1>TODO app</h1>
             <AddTodo value={value} onChange={handleChange} add={add} addDir={addDir} />
-            <div style={{ height: 400 }}>
+            <div style={{ height: 250 }}>
                 <SortableTree
                     treeData={tree}
                     onChange={setTree}
