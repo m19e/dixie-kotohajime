@@ -183,8 +183,7 @@ const App = () => {
                     canDrag={({ node }) => !node.dragDisabled}
                     canDrop={({ nextParent }) => !nextParent || nextParent.isDir}
                     generateNodeProps={(rowInfo) => ({
-                        title:
-                            (rowInfo.node.title as string).length < 6 ? [<>{rowInfo.node.title}</>] : [<>{(rowInfo.node.title as string).slice(0, 6) + "…"}</>],
+                        title: [<>{(rowInfo.node.title as string).slice(0, 10) + ((rowInfo.node.title as string).length > 10 ? "…" : "")}</>],
                         icons: rowInfo.node.isDir
                             ? [
                                   <div
