@@ -19,15 +19,6 @@ interface ITodo {
     children?: ITodo[];
 }
 
-const dataList: ITodo[] = [
-    { id: 1, title: "Parent", parent: 0 },
-    { id: 2, title: "child 1", parent: 1 },
-    { id: 3, title: "child 2", parent: 2 },
-    { id: 4, title: "child 3", parent: 3 },
-];
-
-const dataTree = convertLTT(dataList);
-
 const App = () => {
     const [value, setValue] = useState("");
     const [todoList, setTodoList] = useState<ITodo[]>([]);
@@ -96,16 +87,6 @@ const App = () => {
             });
     };
 
-    // const renderTree = (nodes: ITodo) => {
-    //    console.log(nodes);
-
-    //     return (
-    //         <TreeItem key={nodes.id} nodeId={"" + nodes.id} label={nodes.title}>
-    //             {Array.isArray(nodes.children) ? nodes.children.map((node) => renderTree(node)) : null}
-    //         </TreeItem>
-    //     );
-    // };
-
     const createNode = (rowInfo: ExtendedNodeData, addNode: { [key: string]: string }) => {
         // maybe use 'addNodeUnderParent'
     };
@@ -155,26 +136,6 @@ const App = () => {
         <div>
             <h1>TODO app</h1>
             <AddTodo value={value} onChange={handleChange} add={add} addDir={addDir} />
-            {/* <TreeView
-                defaultCollapseIcon={<ExpandMore />}
-                defaultExpandIcon={<ChevronRight />}
-                defaultExpanded={["0"]}
-                style={{ maxWidth: "200px", overflow: "hidden" }}
-            >
-                <TreeItem nodeId="0" label="TodoList">
-                    {todoList.map((todo: ITodo) => (
-                        <TreeItem key={todo.id} nodeId={"" + todo.id} label={todo.content} />
-                    ))}
-                </TreeItem>
-            </TreeView> */}
-            {/* <TreeView
-                defaultCollapseIcon={<ExpandMore />}
-                defaultExpandIcon={<ChevronRight />}
-                defaultExpanded={[...todoList.map((td) => "" + td.id)]}
-                style={{ maxWidth: "200px", overflow: "hidden" }}
-            >
-                {renderTree(tree)}
-            </TreeView> */}
             <div style={{ height: 400 }}>
                 <SortableTree
                     treeData={tree}
