@@ -132,6 +132,62 @@ const App = () => {
         }
     };
 
+    const createNodeProps = (rowInfo: ExtendedNodeData): { [index: string]: JSX.Element[] } => {
+        if (rowInfo.node.isEditting)
+            return {
+                title: [<input type="text" value={value} onChange={handleChange}></input>],
+                buttons: [
+                    <button onClick={() => updateNode(rowInfo, { title: value, isEditting: false })}>Update</button>,
+                    <button onClick={() => updateNode(rowInfo, { isEditting: false })}>Cancel</button>,
+                ],
+            };
+        return {
+            // title: [<>{(rowInfo.node.title as string).slice(0, 10) + ((rowInfo.node.title as string).length > 10 ? "…" : "")}</>],
+            icons: rowInfo.node.isDir
+                ? [
+                      <div
+                          style={{
+                              borderLeft: "solid 8px gray",
+                              borderBottom: "solid 10px gray",
+                              marginRight: 10,
+                              boxSizing: "border-box",
+                              width: 16,
+                              height: 12,
+                              filter: rowInfo.node.expanded
+                                  ? "drop-shadow(1px 0 0 gray) drop-shadow(0 1px 0 gray) drop-shadow(0 -1px 0 gray) drop-shadow(-1px 0 0 gray)"
+                                  : "none",
+                              borderColor: rowInfo.node.expanded ? "white" : "gray",
+                          }}
+                      />,
+                  ]
+                : [],
+            buttons: rowInfo.node.isDir
+                ? [
+                      <button
+                          onClick={() => {
+                              updateNode(rowInfo, { isEditting: true });
+                              setValue(rowInfo.node.title as string);
+                          }}
+                      >
+                          Rename
+                      </button>,
+                      <button onClick={() => console.log(rowInfo.node)}>AddFile</button>,
+                      <button onClick={() => deleteNode(rowInfo)}>Delete</button>,
+                  ]
+                : [
+                      <button
+                          onClick={() => {
+                              updateNode(rowInfo, { isEditting: true });
+                              setValue(rowInfo.node.title as string);
+                          }}
+                      >
+                          Rename
+                      </button>,
+                      <button onClick={() => deleteNode(rowInfo)}>Delete</button>,
+                  ],
+        };
+    };
+
     return (
         <div>
             <h1>TODO app</h1>
