@@ -143,37 +143,7 @@ const App = () => {
                     theme={FileExplorerTheme}
                     canDrag={({ node }) => !node.dragDisabled}
                     canDrop={({ nextParent }) => !nextParent || nextParent.isDir}
-                    generateNodeProps={(rowInfo) => ({
-                        title: [<>{(rowInfo.node.title as string).slice(0, 10) + ((rowInfo.node.title as string).length > 10 ? "…" : "")}</>],
-                        icons: rowInfo.node.isDir
-                            ? [
-                                  <div
-                                      style={{
-                                          borderLeft: "solid 8px gray",
-                                          borderBottom: "solid 10px gray",
-                                          marginRight: 10,
-                                          boxSizing: "border-box",
-                                          width: 16,
-                                          height: 12,
-                                          filter: rowInfo.node.expanded
-                                              ? "drop-shadow(1px 0 0 gray) drop-shadow(0 1px 0 gray) drop-shadow(0 -1px 0 gray) drop-shadow(-1px 0 0 gray)"
-                                              : "none",
-                                          borderColor: rowInfo.node.expanded ? "white" : "gray",
-                                      }}
-                                  />,
-                              ]
-                            : [],
-                        buttons: rowInfo.node.isDir
-                            ? [
-                                  <button onClick={() => console.log(rowInfo.node)}>Rename</button>,
-                                  <button onClick={() => console.log(rowInfo.node)}>AddFile</button>,
-                                  <button onClick={() => deleteNode(rowInfo)}>Delete</button>,
-                              ]
-                            : [
-                                  <button onClick={() => updateNode(rowInfo, { title: value })}>Rename</button>,
-                                  <button onClick={() => deleteNode(rowInfo)}>Delete</button>,
-                              ],
-                    })}
+                    generateNodeProps={(rowInfo) => createNodeProps(rowInfo)}
                 />
             </div>
             <h2>Data on DB</h2>
