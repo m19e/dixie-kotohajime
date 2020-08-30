@@ -91,7 +91,7 @@ const App = () => {
         // maybe use 'addNodeUnderParent'
     };
 
-    const updateNode = (rowInfo: ExtendedNodeData, updatedObj: { [key: string]: string }) => {
+    const updateNode = (rowInfo: ExtendedNodeData, updatedObj: { [key: string]: string | boolean }) => {
         const { path, node } = rowInfo;
         const newNode = Object.assign({}, node, updatedObj);
         setTree(
