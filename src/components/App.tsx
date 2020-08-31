@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ExpandMore, ChevronRight } from "@material-ui/icons";
 // import { TreeView, TreeItem } from "@material-ui/lab";
-import SortableTree, { TreeItem, ExtendedNodeData, removeNodeAtPath, changeNodeAtPath, addNodeUnderParent } from "react-sortable-tree";
+import SortableTree, { TreeItem, ExtendedNodeData, removeNodeAtPath, changeNodeAtPath, addNodeUnderParent, getNodeAtPath } from "react-sortable-tree";
 import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
 import "react-sortable-tree/style.css";
 import useLocalStorage from "react-use-localstorage";
@@ -87,13 +87,32 @@ const App = () => {
             });
     };
 
-    const createNode = (rowInfo: ExtendedNodeData) => {
+    const createNode = (rowInfo: ExtendedNodeData, isDir: boolean) => {
         // maybe use 'addNodeUnderParent'
         // all to do is adding node has {isEditting : true}
         // notes: cancel = delete is not equal process update cancel
+        const newNode = { title: "newnode", isDir: isDir, isEditting: true, newfile: true };
+        const { node } = rowInfo;
+        const parentKey = node.treeIndex !== -1 ? node.treeIndex : undefined;
+        db.table("todos")
+            .add(newNode)
+            .then((id) => {
+                setValue("");
+                setTree(
+                    addNodeUnderParent({
+                        treeData: tree,
+                        newNode: Object.assign({}, newNode, { id: id as number }),
+                        parentKey,
+                        getNodeKey: ({ treeIndex }) => treeIndex,
+                        expandParent: true,
+                        // addAsFirstChild: true,
+                    }).treeData
+                );
+            });
     };
 
     const updateNode = (rowInfo: ExtendedNodeData, updatedObj: { [key: string]: string | boolean }) => {
+        if (value.trim() === "") return;
         const { path, node } = rowInfo;
         const newNode = Object.assign({}, node, updatedObj);
         setTree(
@@ -138,10 +157,15 @@ const App = () => {
         if (rowInfo.node.isEditting)
             return {
                 title: [<input type="text" value={value} onChange={handleChange}></input>],
-                buttons: [
-                    <button onClick={() => updateNode(rowInfo, { title: value, isEditting: false })}>Update</button>,
-                    <button onClick={() => updateNode(rowInfo, { isEditting: false })}>Cancel</button>,
-                ],
+                buttons: rowInfo.node.newfile
+                    ? [
+                          <button onClick={() => updateNode(rowInfo, { title: value, isEditting: false, newfile: false })}>Add</button>,
+                          <button onClick={() => deleteNode(rowInfo)}>Cancel</button>,
+                      ]
+                    : [
+                          <button onClick={() => updateNode(rowInfo, { title: value, isEditting: false })}>Update</button>,
+                          <button onClick={() => updateNode(rowInfo, { isEditting: false })}>Cancel</button>,
+                      ],
             };
         return {
             // title: [<>{(rowInfo.node.title as string).slice(0, 10) + ((rowInfo.node.title as string).length > 10 ? "…" : "")}</>],
@@ -173,7 +197,8 @@ const App = () => {
                       >
                           Rename
                       </button>,
-                      <button onClick={() => console.log(rowInfo.node)}>AddFile</button>,
+                      <button onClick={() => createNode(rowInfo, false)}>AddFile</button>,
+                      <button onClick={() => createNode(rowInfo, true)}>AddDir</button>,
                       <button onClick={() => deleteNode(rowInfo)}>Delete</button>,
                   ]
                 : [
@@ -193,7 +218,7 @@ const App = () => {
     return (
         <div>
             <h1>TODO app</h1>
-            <AddTodo value={value} onChange={handleChange} add={add} addDir={addDir} />
+            {/* <AddTodo value={value} onChange={handleChange} add={add} addDir={addDir} /> */}
             <div style={{ height: 250 }}>
                 <SortableTree
                     treeData={tree}
