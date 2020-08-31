@@ -87,7 +87,7 @@ const App = () => {
             });
     };
 
-    const createNode = (rowInfo: ExtendedNodeData, addNode: { [key: string]: string }) => {
+    const createNode = (rowInfo: ExtendedNodeData) => {
         // maybe use 'addNodeUnderParent'
         // all to do is adding node has {isEditting : true}
         // notes: cancel = delete is not equal process update cancel
