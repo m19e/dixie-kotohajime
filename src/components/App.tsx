@@ -151,7 +151,7 @@ const App = () => {
         );
 
         if (Array.isArray(node.children) && node.children.length !== 0) {
-            handleBulkDelete([...node.children.map((child) => child.id), node.id]);
+            handleBulkDelete(getChildren(node));
         } else {
             handleDelete(node.id);
         }
