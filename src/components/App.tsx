@@ -91,7 +91,7 @@ const App = () => {
         // maybe use 'addNodeUnderParent'
         // all to do is adding node has {isEditting : true}
         // notes: cancel = delete is not equal process update cancel
-        const newNode = { title: "newnode", isDir: isDir, isEditting: true, isNewFile: true };
+        const newNode = { isDir: isDir, isEditting: true, isNewFile: true };
         const { path } = rowInfo;
         db.table("todos")
             .add(newNode)
