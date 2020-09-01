@@ -91,7 +91,7 @@ const App = () => {
         // maybe use 'addNodeUnderParent'
         // all to do is adding node has {isEditting : true}
         // notes: cancel = delete is not equal process update cancel
-        const newNode = { title: "newnode", isDir: isDir, isEditting: true, newfile: true };
+        const newNode = { title: "newnode", isDir: isDir, isEditting: true, isNewFile: true };
         const { path } = rowInfo;
         db.table("todos")
             .add(newNode)
@@ -158,7 +158,7 @@ const App = () => {
                 title: [<input type="text" value={value} onChange={handleChange}></input>],
                 buttons: rowInfo.node.newfile
                     ? [
-                          <button onClick={() => updateNode(rowInfo, { title: value, isEditting: false, newfile: false })}>Add</button>,
+                          <button onClick={() => updateNode(rowInfo, { title: value, isEditting: false, isNewFile: false })}>Add</button>,
                           <button onClick={() => deleteNode(rowInfo)}>Cancel</button>,
                       ]
                     : [
