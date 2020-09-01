@@ -161,7 +161,7 @@ const App = () => {
         if (rowInfo.node.isEditting)
             return {
                 title: [<input type="text" value={value} onChange={handleChange}></input>],
-                buttons: rowInfo.node.newfile
+                buttons: rowInfo.node.isNewFile
                     ? [
                           <button onClick={() => updateNode(rowInfo, { title: value, isEditting: false, isNewFile: false })}>Add</button>,
                           <button onClick={() => deleteNode(rowInfo)}>Cancel</button>,
