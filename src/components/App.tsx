@@ -92,8 +92,7 @@ const App = () => {
         // all to do is adding node has {isEditting : true}
         // notes: cancel = delete is not equal process update cancel
         const newNode = { title: "newnode", isDir: isDir, isEditting: true, newfile: true };
-        const { node } = rowInfo;
-        const parentKey = node.treeIndex !== -1 ? node.treeIndex : undefined;
+        const { path } = rowInfo;
         db.table("todos")
             .add(newNode)
             .then((id) => {
@@ -102,10 +101,10 @@ const App = () => {
                     addNodeUnderParent({
                         treeData: tree,
                         newNode: Object.assign({}, newNode, { id: id as number }),
-                        parentKey,
+                        parentKey: path[path.length - 1],
                         getNodeKey: ({ treeIndex }) => treeIndex,
                         expandParent: true,
-                        // addAsFirstChild: true,
+                        addAsFirstChild: true,
                     }).treeData
                 );
             });
