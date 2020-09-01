@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ExpandMore, ChevronRight } from "@material-ui/icons";
 // import { TreeView, TreeItem } from "@material-ui/lab";
-import SortableTree, { TreeItem, ExtendedNodeData, removeNodeAtPath, changeNodeAtPath, addNodeUnderParent, getNodeAtPath } from "react-sortable-tree";
+import SortableTree, { TreeItem, ExtendedNodeData, removeNodeAtPath, changeNodeAtPath, addNodeUnderParent } from "react-sortable-tree";
 import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
 import "react-sortable-tree/style.css";
 import useLocalStorage from "react-use-localstorage";
@@ -88,9 +88,6 @@ const App = () => {
     };
 
     const createNode = (rowInfo: ExtendedNodeData, isDir: boolean) => {
-        // maybe use 'addNodeUnderParent'
-        // all to do is adding node has {isEditting : true}
-        // notes: cancel = delete is not equal process update cancel
         const newNode = { isDir: isDir, isEditting: true, isNewFile: true };
         const { path } = rowInfo;
         db.table("todos")
@@ -167,7 +164,6 @@ const App = () => {
                       ],
             };
         return {
-            // title: [<>{(rowInfo.node.title as string).slice(0, 10) + ((rowInfo.node.title as string).length > 10 ? "…" : "")}</>],
             icons: rowInfo.node.isDir
                 ? [
                       <div
@@ -217,7 +213,6 @@ const App = () => {
     return (
         <div>
             <h1>TODO app</h1>
-            {/* <AddTodo value={value} onChange={handleChange} add={add} addDir={addDir} /> */}
             <div style={{ height: 250 }}>
                 <SortableTree
                     treeData={tree}
