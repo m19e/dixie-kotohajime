@@ -108,8 +108,9 @@ const App = () => {
             });
     };
 
+    // TODO: extract process (DONT entrust Multiple responsibilities on single function)
+    // think way of use setValue
     const updateNode = (rowInfo: ExtendedNodeData, updatedObj: { [key: string]: string | boolean }) => {
-        if (value.trim() === "") return;
         const { path, node } = rowInfo;
         const newNode = Object.assign({}, node, updatedObj);
         setTree(
