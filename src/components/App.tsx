@@ -123,7 +123,8 @@ const App = () => {
             })
         );
 
-        setValue("");
+        // setValue("");
+        setEditMode(false);
 
         db.table("todos")
             .update(node.id, updatedObj)
