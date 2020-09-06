@@ -106,6 +106,8 @@ const App = () => {
                     }).treeData
                 );
             });
+
+        setEditMode(true);
     };
 
     // TODO: extract process (DONT entrust Multiple responsibilities on single function)
@@ -123,8 +125,10 @@ const App = () => {
             })
         );
 
-        // setValue("");
-        setEditMode(false);
+        if (!updatedObj.isEditting) {
+            setValue("");
+            setEditMode(false);
+        }
 
         db.table("todos")
             .update(node.id, updatedObj)
@@ -158,11 +162,31 @@ const App = () => {
         } else {
             handleDelete(node.id);
         }
+
+        setEditMode(false);
     };
 
     const createNodeProps = (rowInfo: ExtendedNodeData): { [index: string]: JSX.Element[] } => {
         if (rowInfo.node.isEditting)
             return {
+                icons: rowInfo.node.isDir
+                    ? [
+                          <div
+                              style={{
+                                  borderLeft: "solid 8px gray",
+                                  borderBottom: "solid 10px gray",
+                                  marginRight: 10,
+                                  boxSizing: "border-box",
+                                  width: 16,
+                                  height: 12,
+                                  filter: rowInfo.node.expanded
+                                      ? "drop-shadow(1px 0 0 gray) drop-shadow(0 1px 0 gray) drop-shadow(0 -1px 0 gray) drop-shadow(-1px 0 0 gray)"
+                                      : "none",
+                                  borderColor: rowInfo.node.expanded ? "white" : "gray",
+                              }}
+                          />,
+                      ]
+                    : [],
                 title: [<input type="text" value={value} onChange={handleChange}></input>],
                 buttons: rowInfo.node.isNewFile
                     ? [
@@ -174,6 +198,29 @@ const App = () => {
                           <button onClick={() => updateNode(rowInfo, { isEditting: false })}>Cancel</button>,
                       ],
             };
+
+        if (editMode)
+            return {
+                icons: rowInfo.node.isDir
+                    ? [
+                          <div
+                              style={{
+                                  borderLeft: "solid 8px gray",
+                                  borderBottom: "solid 10px gray",
+                                  marginRight: 10,
+                                  boxSizing: "border-box",
+                                  width: 16,
+                                  height: 12,
+                                  filter: rowInfo.node.expanded
+                                      ? "drop-shadow(1px 0 0 gray) drop-shadow(0 1px 0 gray) drop-shadow(0 -1px 0 gray) drop-shadow(-1px 0 0 gray)"
+                                      : "none",
+                                  borderColor: rowInfo.node.expanded ? "white" : "gray",
+                              }}
+                          />,
+                      ]
+                    : [],
+            };
+
         return {
             icons: rowInfo.node.isDir
                 ? [
@@ -197,8 +244,9 @@ const App = () => {
                 ? [
                       <button
                           onClick={() => {
-                              updateNode(rowInfo, { isEditting: true });
+                              setEditMode(true);
                               setValue(rowInfo.node.title as string);
+                              updateNode(rowInfo, { isEditting: true });
                           }}
                       >
                           Rename
@@ -210,8 +258,9 @@ const App = () => {
                 : [
                       <button
                           onClick={() => {
-                              updateNode(rowInfo, { isEditting: true });
+                              setEditMode(true);
                               setValue(rowInfo.node.title as string);
+                              updateNode(rowInfo, { isEditting: true });
                           }}
                       >
                           Rename
