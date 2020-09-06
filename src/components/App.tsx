@@ -278,7 +278,7 @@ const App = () => {
                     treeData={tree}
                     onChange={setTree}
                     theme={FileExplorerTheme}
-                    canDrag={({ node }) => !node.dragDisabled}
+                    canDrag={({ node }) => !editMode && !node.dragDisabled}
                     canDrop={({ nextParent }) => !nextParent || nextParent.isDir}
                     generateNodeProps={(rowInfo) => createNodeProps(rowInfo)}
                 />
