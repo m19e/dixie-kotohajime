@@ -40,6 +40,10 @@ const App = () => {
         setValue(e.target.value);
     };
 
+    const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setContent(e.target.value);
+    };
+
     const add = () => {
         if (value.trim() === "") return;
         const todo = { title: value, done: false, parent: 0 };
