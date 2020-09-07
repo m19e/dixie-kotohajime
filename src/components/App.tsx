@@ -288,6 +288,7 @@ const App = () => {
                     generateNodeProps={(rowInfo) => createNodeProps(rowInfo)}
                 />
             </div>
+            <textarea value={content} onChange={handleContentChange} cols={30} rows={10}></textarea>
             <h2>Data on DB</h2>
             <ul>
                 {todoList.map((todo: ITodo) => (
