@@ -25,6 +25,7 @@ const App = () => {
     const [tree, setTree] = useState<TreeItem[]>([]);
     const [treeLocal, setTreeLocal] = useLocalStorage("mytodolist-tree", JSON.stringify([{ id: 1, title: "Menu", parent: 0, isDir: true }]));
     const [editMode, setEditMode] = useState(false);
+    const [content, setContent] = useState("本文を入力");
 
     useEffect(() => {
         loadListFromDB("todos", setTodoList);
