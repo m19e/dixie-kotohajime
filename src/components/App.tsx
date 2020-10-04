@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { ExpandMore, ChevronRight } from "@material-ui/icons";
-// import { TreeView, TreeItem } from "@material-ui/lab";
 import SortableTree, { TreeItem, ExtendedNodeData, removeNodeAtPath, changeNodeAtPath, addNodeUnderParent, getFlatDataFromTree } from "react-sortable-tree";
 import FileExplorerTheme from "react-sortable-tree-theme-file-explorer";
 import "react-sortable-tree/style.css";
 import useLocalStorage from "react-use-localstorage";
 import Todo from "./Todo";
-import AddTodo from "./AddTodo";
 import db from "./db";
-import convertLTT from "./convertLTT";
 import loadListFromDB from "./loadListFromDB";
 
 interface ITodo {
