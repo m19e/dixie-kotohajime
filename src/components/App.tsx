@@ -7,6 +7,7 @@ import useLocalStorage from "react-use-localstorage";
 import Todo from "./Todo";
 import db from "./db";
 import loadListFromDB from "./loadListFromDB";
+import createNodeProps, { UpdateObj } from "./createNodeProps";
 
 interface ITodo {
     id: number;
@@ -282,7 +283,9 @@ const App = () => {
                     theme={FileExplorerTheme}
                     canDrag={({ node }) => !editMode && !node.dragDisabled}
                     canDrop={({ nextParent }) => !nextParent || nextParent.isDir}
-                    generateNodeProps={(rowInfo) => createNodeProps(rowInfo)}
+                    generateNodeProps={(rowInfo) =>
+                        createNodeProps(rowInfo, { value, editMode, setValue, setEditMode, handleChange, createNode, updateNode, deleteNode })
+                    }
                 />
             </div>
             <textarea value={content} onChange={handleContentChange} cols={30} rows={10}></textarea>
